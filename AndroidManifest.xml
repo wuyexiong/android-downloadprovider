@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tree.love.providers.downloads"
+     >
+<!-- android:sharedUserId="android.media" -->
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <!-- Allows access to the Download Manager -->
+    <permission
+        android:name="tree.love.android.permission.ACCESS_DOWNLOAD_MANAGER"
+        android:description="@string/permdesc_downloadManager"
+        android:label="@string/permlab_downloadManager"
+        android:protectionLevel="normal" />
+
+    <!-- Allows advanced access to the Download Manager -->
+    <permission
+        android:name="tree.love.android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED"
+        android:description="@string/permdesc_downloadManagerAdvanced"
+        android:label="@string/permlab_downloadManagerAdvanced"
+        android:protectionLevel="normal" />
+
+    <!-- Allows to send download completed intents -->
+    <permission
+        android:name="tree.love.android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS"
+        android:description="@string/permdesc_downloadCompletedIntent"
+        android:label="@string/permlab_downloadCompletedIntent"
+        android:protectionLevel="normal" />
+
+    <!-- Allows to download non-purgeable files to the cache partition through the public API -->
+    <permission
+        android:name="tree.love.android.permission.DOWNLOAD_CACHE_NON_PURGEABLE"
+        android:description="@string/permdesc_downloadCacheNonPurgeable"
+        android:label="@string/permlab_downloadCacheNonPurgeable"
+        android:protectionLevel="normal" />
+
+    <!-- Allows to queue downloads without a notification shown while the download runs. -->
+    <permission
+        android:name="tree.love.android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"
+        android:description="@string/permdesc_downloadWithoutNotification"
+        android:label="@string/permlab_downloadWithoutNotification"
+        android:permissionGroup="android.permission-group.NETWORK"
+        android:protectionLevel="normal" />
+
+    <!--
+         Allows an app to access all downloads in the system via the /all_downloads/ URIs.  The
+         protection level could be relaxed in the future to support third-party download
+         managers.
+    -->
+    <permission
+        android:name="tree.love.android.permission.ACCESS_ALL_DOWNLOADS"
+        android:description="@string/permdesc_accessAllDownloads"
+        android:label="@string/permlab_accessAllDownloads"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" /> -->
+    <uses-permission android:name="tree.love.android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
+    <uses-permission android:name="tree.love.android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="tree.love.android.permission.INTERNET" />
+    <uses-permission android:name="tree.love.android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="tree.love.android.permission.ACCESS_ALL_DOWNLOADS" />
+    <!-- <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS" /> -->
+    <!-- TODO: replace with READ_NETWORK_POLICY permission when it exists -->
+    <!-- <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" /> -->
+    <!-- <uses-permission android:name="android.permission.MODIFY_NETWORK_ACCOUNTING" /> -->
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher_download"
+        android:label="@string/app_label" >
+
+        <!-- android:process="android.process.media" -->
+        <provider
+            android:name="tree.love.providers.downloads.DownloadProvider"
+            android:authorities="tree.love.download.provider"
+            android:exported="true" >
+
+            <!--
+               Anyone can access /my_downloads, the provider internally restricts access by UID for
+               these URIs
+            -->
+            <path-permission
+                android:pathPrefix="/my_downloads"
+                android:permission="android.permission.INTERNET" />
+            <!-- to access /all_downloads, ACCESS_ALL_DOWNLOADS permission is required -->
+            <path-permission
+                android:pathPrefix="/all_downloads"
+                android:permission="android.permission.ACCESS_ALL_DOWNLOADS" />
+            <!-- Temporary, for backwards compatibility -->
+            <path-permission
+                android:pathPrefix="/download"
+                android:permission="android.permission.INTERNET" />
+            <!--
+               Apps with access to /all_downloads/... can grant permissions, allowing them to share
+               downloaded files with other viewers
+            -->
+            <grant-uri-permission android:pathPrefix="/all_downloads/" />
+            <!--
+               Apps with access to /my_downloads/... can grant permissions, allowing them to share
+               downloaded files with other viewers
+            -->
+            <grant-uri-permission android:pathPrefix="/my_downloads/" />
+        </provider>
+        <provider
+            android:name="tree.love.providers.downloads.DownloadStorageProvider"
+            android:authorities="com.android.providers.downloads.documents"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS" >
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
+
+        <service
+            android:name="tree.love.providers.downloads.DownloadService"
+            android:permission="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+
+        <receiver
+            android:name="tree.love.providers.downloads.DownloadReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="tree.love.providers.downloads.SizeLimitActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Translucent" />
+    </application>
+
+</manifest>

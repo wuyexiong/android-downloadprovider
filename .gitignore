@@ -1,0 +1,39 @@
+# Generated files
+bin/
+gen/
+build/
+
+# Local configuration file (sdk path, etc)
+.settings/
+.classpath
+.project
+local.properties
+.DS_Store
+
+# Ctags file
+tags
+
+# files for the dex VM
+*.dex
+
+#Idea
+.idea
+*.iml
+*.ipr
+*.iws
+
+# built application files
+*.apk
+*.ap_
+
+# Java class files
+*.class
+
+# ignore all  gradle file
+#*.gradle
+#gradlew*
+#gradle/
+#.gradle
+
+#Ohter
+#tmp
