@@ -16,7 +16,6 @@
 
 package tree.love.providers.downloads.ui;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -29,8 +28,10 @@ import android.webkit.DateSorter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import tree.love.providers.downloads.DownloadManager;
+
 import java.util.Vector;
-import tree.love.providers.downloads.ui.R;
 
 /**
  * ExpandableListAdapter which separates data into categories based on date.  Copied from

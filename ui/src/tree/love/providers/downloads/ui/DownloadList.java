@@ -19,7 +19,6 @@ package tree.love.providers.downloads.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -31,7 +30,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -48,11 +46,12 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import tree.love.providers.downloads.Constants;
 import tree.love.providers.downloads.DownloadManager;
 import tree.love.providers.downloads.Downloads;
 import tree.love.providers.downloads.OpenHelper;
-import tree.love.providers.downloads.ui.R;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -147,15 +146,15 @@ public class DownloadList extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        onCreateLegacy(icicle);
         // Trampoline over to new management UI
         // final Intent intent = new
         // Intent(DocumentsContract.ACTION_MANAGE_ROOT);
-        final Intent intent = new Intent(ACTION_MANAGE_ROOT);
-        intent.setData(DocumentsContract.buildRootUri(
-                Constants.STORAGE_AUTHORITY, Constants.STORAGE_ROOT_ID));
-        startActivity(intent);
-        finish();
+        // final Intent intent = new Intent(ACTION_MANAGE_ROOT);
+        // intent.setData(DocumentsContract.buildRootUri(
+        // Constants.STORAGE_AUTHORITY, Constants.STORAGE_ROOT_ID));
+        // startActivity(intent);
+        // finish();
     }
 
     /** {@hide} */
@@ -166,7 +165,7 @@ public class DownloadList extends Activity {
         setFinishOnTouchOutside(true);
         setupViews();
 
-        mDownloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        mDownloadManager = new DownloadManager(getContentResolver(), getPackageName());
         mDownloadManager.setAccessAllDownloads(true);
         DownloadManager.Query baseQuery = new DownloadManager.Query()
                 .setOnlyIncludeVisibleInDownloadsUi(true);

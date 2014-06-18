@@ -16,7 +16,6 @@
 
 package tree.love.providers.downloads.ui;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,12 +31,14 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import tree.love.providers.downloads.DownloadManager;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import tree.love.providers.downloads.ui.R;
 
 /**
  * List adapter for Cursors returned by {@link DownloadManager}.

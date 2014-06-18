@@ -483,7 +483,6 @@ public class DownloadManager {
          * @throws IllegalStateException If the external storage directory
          *             cannot be found or created.
          */
-        @TargetApi(Build.VERSION_CODES.FROYO)
         public Request setDestinationInExternalFilesDir(Context context, String dirType,
                 String subPath) {
             final File file = context.getExternalFilesDir(dirType);

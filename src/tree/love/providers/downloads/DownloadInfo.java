@@ -16,7 +16,6 @@
 
 package tree.love.providers.downloads;
 
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -27,7 +26,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -134,7 +132,6 @@ public class DownloadInfo {
             }
         }
 
-        @TargetApi(Build.VERSION_CODES.ECLAIR)
         private void addHeader(DownloadInfo info, String header, String value) {
             info.mRequestHeaders.add(Pair.create(header, value));
         }

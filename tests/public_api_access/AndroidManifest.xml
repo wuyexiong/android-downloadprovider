@@ -22,6 +22,10 @@
         <uses-library android:name="android.test.runner" />
     </application>
 
+        <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <!--

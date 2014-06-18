@@ -17,12 +17,13 @@
 
 package tree.love.providers.downloads.ui;
 
-import android.app.DownloadManager;
 import android.database.Cursor;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
+
+import tree.love.providers.downloads.DownloadManager;
 
 /**
  * Adapter for a date-sorted list of downloads.  Delegates all the real work to

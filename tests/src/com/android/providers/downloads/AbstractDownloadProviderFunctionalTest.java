@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.Downloads;
 import android.test.MoreAsserts;
 import android.test.RenamingDelegatingContext;
 import android.test.ServiceTestCase;
@@ -37,6 +36,10 @@ import com.google.mockwebserver.MockResponse;
 import com.google.mockwebserver.MockWebServer;
 import com.google.mockwebserver.RecordedRequest;
 import com.google.mockwebserver.SocketPolicy;
+
+import tree.love.providers.downloads.DownloadProvider;
+import tree.love.providers.downloads.DownloadService;
+import tree.love.providers.downloads.Downloads;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -161,7 +164,7 @@ public abstract class AbstractDownloadProviderFunctionalTest extends
         mTestContext.setResolver(mResolver);
         setContext(mTestContext);
         setupService();
-        getService().mSystemFacade = mSystemFacade;
+        // getService().mSystemFacade = mSystemFacade;
         mSystemFacade.setUp();
         assertTrue(isDatabaseEmpty()); // ensure we're not messing with real data
         mServer = new MockWebServer();

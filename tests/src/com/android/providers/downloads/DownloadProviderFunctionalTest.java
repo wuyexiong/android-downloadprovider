@@ -25,11 +25,14 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.SystemClock;
-import android.provider.Downloads;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.google.mockwebserver.MockWebServer;
 import com.google.mockwebserver.RecordedRequest;
+
+import tree.love.providers.downloads.DownloadProvider;
+import tree.love.providers.downloads.DownloadService;
+import tree.love.providers.downloads.Downloads;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;

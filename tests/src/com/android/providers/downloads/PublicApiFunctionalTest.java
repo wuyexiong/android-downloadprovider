@@ -16,9 +16,6 @@
 
 package com.android.providers.downloads;
 
-import static android.app.DownloadManager.STATUS_FAILED;
-import static android.app.DownloadManager.STATUS_PAUSED;
-import static android.net.TrafficStats.GB_IN_BYTES;
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static java.net.HttpURLConnection.HTTP_MOVED_TEMP;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
@@ -33,8 +30,9 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static tree.love.providers.downloads.DownloadManager.STATUS_FAILED;
+import static tree.love.providers.downloads.DownloadManager.STATUS_PAUSED;
 
-import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -44,7 +42,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.SystemClock;
-import android.provider.Downloads;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.Suppress;
 import android.text.format.DateUtils;
@@ -52,6 +49,11 @@ import android.text.format.DateUtils;
 import com.google.mockwebserver.MockResponse;
 import com.google.mockwebserver.RecordedRequest;
 import com.google.mockwebserver.SocketPolicy;
+
+import tree.love.providers.downloads.Constants;
+import tree.love.providers.downloads.DownloadManager;
+import tree.love.providers.downloads.DownloadReceiver;
+import tree.love.providers.downloads.Downloads;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,6 +65,11 @@ import java.util.concurrent.TimeoutException;
 
 @LargeTest
 public class PublicApiFunctionalTest extends AbstractPublicApiTest {
+
+    public static final long KB_IN_BYTES = 1024;
+    public static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
+    public static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
+
     private static final String REDIRECTED_PATH = "/other_path";
     private static final String ETAG = "my_etag";
 

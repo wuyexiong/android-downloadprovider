@@ -178,7 +178,7 @@ public final class DownloadProvider extends ContentProvider {
     private int mDefContainerUid = -1;
     private File mDownloadsDataDir;
 
-    SystemFacade mSystemFacade;
+    public SystemFacade mSystemFacade;
 
     /**
      * This class encapsulates a SQL where clause and its parameters.  It makes it possible for

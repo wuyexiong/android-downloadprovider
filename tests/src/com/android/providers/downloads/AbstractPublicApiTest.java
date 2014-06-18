@@ -16,17 +16,18 @@
 
 package com.android.providers.downloads;
 
-import static android.app.DownloadManager.STATUS_FAILED;
-import static android.app.DownloadManager.STATUS_SUCCESSFUL;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
+import static tree.love.providers.downloads.DownloadManager.STATUS_FAILED;
+import static tree.love.providers.downloads.DownloadManager.STATUS_SUCCESSFUL;
 
-import android.app.DownloadManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemClock;
 import android.util.Log;
+
+import tree.love.providers.downloads.DownloadManager;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;

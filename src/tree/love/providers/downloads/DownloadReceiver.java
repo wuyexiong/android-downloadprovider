@@ -48,7 +48,7 @@ public class DownloadReceiver extends BroadcastReceiver {
         sAsyncHandler = new Handler(thread.getLooper());
     }
 
-    SystemFacade mSystemFacade = null;
+    public SystemFacade mSystemFacade = null;
 
     @Override
     public void onReceive(final Context context, final Intent intent) {

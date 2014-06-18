@@ -22,11 +22,11 @@ import android.app.DownloadManager;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Pair;
 
-import com.google.android.collect.Lists;
-import com.google.android.collect.Sets;
 import com.google.mockwebserver.MockResponse;
 import com.google.mockwebserver.SocketPolicy;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,7 +59,7 @@ public class ThreadingTest extends AbstractPublicApiTest {
     }
 
     public void testFilenameRace() throws Exception {
-        final List<Pair<Download, String>> downloads = Lists.newArrayList();
+        final List<Pair<Download, String>> downloads = new ArrayList<Pair<Download, String>>();
 
         // Request dozen files at once with same name
         for (int i = 0; i < 12; i++) {
@@ -81,7 +81,7 @@ public class ThreadingTest extends AbstractPublicApiTest {
         }
 
         // Ensure that contents are clean and filenames unique
-        final Set<String> seenFiles = Sets.newHashSet();
+        final Set<String> seenFiles = new HashSet<String>();
 
         for (Pair<Download, String> d : downloads) {
             final String file = d.first.getStringField(DownloadManager.COLUMN_LOCAL_FILENAME);

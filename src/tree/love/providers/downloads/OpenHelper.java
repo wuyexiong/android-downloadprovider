@@ -62,8 +62,12 @@ public class OpenHelper {
      * subtleties around installing packages.
      */
     private static Intent buildViewIntent(Context context, long id) {
-        final DownloadManager downManager = (DownloadManager) context.getSystemService(
-                Context.DOWNLOAD_SERVICE);
+        // final DownloadManager downManager = (DownloadManager)
+        // context.getSystemService(
+        // Context.DOWNLOAD_SERVICE);
+
+        final DownloadManager downManager = new DownloadManager(context.getContentResolver(),
+                context.getPackageName());
         downManager.setAccessAllDownloads(true);
 
         final Cursor cursor = downManager.query(new DownloadManager.Query().setFilterById(id));

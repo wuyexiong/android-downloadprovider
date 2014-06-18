@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.DetailedState;
+
+import tree.love.providers.downloads.SystemFacade;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class FakeSystemFacade implements SystemFacade {
+
     long mTimeMillis = 0;
     Integer mActiveNetworkType = ConnectivityManager.TYPE_WIFI;
     boolean mIsRoaming = false;
@@ -46,9 +49,23 @@ public class FakeSystemFacade implements SystemFacade {
         if (mActiveNetworkType == null) {
             return null;
         } else {
-            final NetworkInfo info = new NetworkInfo(mActiveNetworkType, 0, null, null);
-            info.setDetailedState(DetailedState.CONNECTED, null, null);
-            return info;
+            // final NetworkInfo info = new NetworkInfo(mActiveNetworkType, 0,
+            // null, null);
+            // info.setDetailedState(DetailedState.CONNECTED, null, null);
+            // ConnectivityManager connectivity =
+            // (ConnectivityManager)
+            // mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            // if (connectivity == null) {
+            // Log.w(Constants.TAG, "couldn't get connectivity manager");
+            // return null;
+            // }
+            //
+            // // final NetworkInfo activeInfo =
+            // // connectivity.getActiveNetworkInfoForUid(uid);
+            // final NetworkInfo activeInfo =
+            // connectivity.getActiveNetworkInfo();
+            // return activeInfo;
+            return null;
         }
     }
 
@@ -64,12 +81,12 @@ public class FakeSystemFacade implements SystemFacade {
 
     @Override
     public Long getMaxBytesOverMobile() {
-        return mMaxBytesOverMobile ;
+        return mMaxBytesOverMobile;
     }
 
     @Override
     public Long getRecommendedMaxBytesOverMobile() {
-        return mRecommendedMaxBytesOverMobile ;
+        return mRecommendedMaxBytesOverMobile;
     }
 
     @Override

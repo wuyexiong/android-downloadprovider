@@ -16,13 +16,14 @@
 
 package com.android.providers.downloads.public_api_access_tests;
 
-import android.app.DownloadManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.net.Uri;
-import android.provider.Downloads;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
+
+import tree.love.providers.downloads.DownloadManager;
+import tree.love.providers.downloads.Downloads;
 
 /**
  * DownloadProvider allows apps without permission ACCESS_DOWNLOAD_MANAGER to access it -- this is

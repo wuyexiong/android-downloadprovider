@@ -69,7 +69,7 @@ public class Helpers {
     /**
      * Creates a filename (where the file should be saved) from info about a download.
      */
-    static String generateSaveFile(
+    public static String generateSaveFile(
             Context context,
             String url,
             String hint,
@@ -97,7 +97,7 @@ public class Helpers {
         return path;
     }
 
-    static String getFullPath(String filename, String mimeType, int destination, File base)
+    public static String getFullPath(String filename, String mimeType, int destination, File base)
             throws StopRequestException {
         String extension = null;
         int dotIndex = filename.lastIndexOf('.');

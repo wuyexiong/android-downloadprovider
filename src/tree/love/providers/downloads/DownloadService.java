@@ -37,6 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import tree.love.providers.downloads.util.IndentingPrintWriter;
+import tree.love.providers.downloads.util.IoUtils;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -67,7 +68,7 @@ public class DownloadService extends Service {
     // TODO: migrate WakeLock from individual DownloadThreads out into
     // DownloadReceiver to protect our entire workflow.
 
-    private static final boolean DEBUG_LIFECYCLE = false;
+    private static final boolean DEBUG_LIFECYCLE = true;
 
     SystemFacade mSystemFacade;
 
@@ -123,6 +124,9 @@ public class DownloadService extends Service {
 
         @Override
         public void onChange(final boolean selfChange) {
+            if (Constants.LOGVV) {
+                Log.v(Constants.TAG, "DownloadManagerContentObserver onChange");
+            }
             enqueueUpdate();
         }
     }
@@ -341,7 +345,7 @@ public class DownloadService extends Service {
                 nextActionMillis = Math.min(info.nextActionMillis(now), nextActionMillis);
             }
         } finally {
-            cursor.close();
+            IoUtils.closeQuietly(cursor);
         }
 
         // Clean up stale downloads that disappeared

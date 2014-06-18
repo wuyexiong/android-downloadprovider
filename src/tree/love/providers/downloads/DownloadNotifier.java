@@ -138,6 +138,7 @@ public class DownloadNotifier {
                     clustered.put(tag, collection);
                 }
                 collection.add(info);
+                // clustered.put(tag, collection);
             }
         }
 

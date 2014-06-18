@@ -20,7 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.NetworkInfo;
 
-interface SystemFacade {
+public interface SystemFacade {
     /**
      * @see System#currentTimeMillis()
      */

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tree.love.providers.downloads"
-     >
-<!-- android:sharedUserId="android.media" -->
+    android:sharedUserId="tree.love.download" >
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
@@ -54,14 +54,15 @@
         android:label="@string/permlab_accessAllDownloads"
         android:protectionLevel="normal" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-    <!-- <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" /> -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="tree.love.android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="tree.love.android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
-    <uses-permission android:name="tree.love.android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="tree.love.android.permission.INTERNET" />
-    <uses-permission android:name="tree.love.android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="tree.love.android.permission.ACCESS_ALL_DOWNLOADS" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" /> -->
     <!-- <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS" /> -->
     <!-- TODO: replace with READ_NETWORK_POLICY permission when it exists -->
     <!-- <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" /> -->
@@ -71,8 +72,8 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_download"
         android:label="@string/app_label" >
+<!--          android:process=":download" -->
 
-        <!-- android:process="android.process.media" -->
         <provider
             android:name="tree.love.providers.downloads.DownloadProvider"
             android:authorities="tree.love.download.provider"
@@ -88,7 +89,7 @@
             <!-- to access /all_downloads, ACCESS_ALL_DOWNLOADS permission is required -->
             <path-permission
                 android:pathPrefix="/all_downloads"
-                android:permission="android.permission.ACCESS_ALL_DOWNLOADS" />
+                android:permission="tree.love.android.permission.ACCESS_ALL_DOWNLOADS" />
             <!-- Temporary, for backwards compatibility -->
             <path-permission
                 android:pathPrefix="/download"
@@ -104,7 +105,7 @@
             -->
             <grant-uri-permission android:pathPrefix="/my_downloads/" />
         </provider>
-        <provider
+       <!--  <provider
             android:name="tree.love.providers.downloads.DownloadStorageProvider"
             android:authorities="com.android.providers.downloads.documents"
             android:exported="true"
@@ -113,11 +114,11 @@
             <intent-filter>
                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
             </intent-filter>
-        </provider>
+        </provider> -->
 
         <service
             android:name="tree.love.providers.downloads.DownloadService"
-            android:permission="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+            android:permission="tree.love.android.permission.ACCESS_DOWNLOAD_MANAGER" />
 
         <receiver
             android:name="tree.love.providers.downloads.DownloadReceiver"

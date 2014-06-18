@@ -13,22 +13,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- -->
+-->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.android.providers.downloads.tests"
-          android:sharedUserId="android.media">
+    package="com.android.providers.downloads.tests"
+    android:sharedUserId="tree.love.download" >
 
     <application>
         <uses-library android:name="android.test.runner" />
     </application>
 
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
     <!--
     The test declared in this instrumentation can be run via this command
     "adb shell am instrument -w com.android.providers.downloads.tests/android.test.InstrumentationTestRunner"
     -->
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="com.android.providers.downloads"
-                     android:label="Tests for Download Manager"/>
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Tests for Download Manager"
+        android:targetPackage="com.android.providers.downloads.tests" />
 
 </manifest>

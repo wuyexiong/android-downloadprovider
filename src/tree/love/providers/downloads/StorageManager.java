@@ -42,7 +42,7 @@ import java.util.List;
  * a threshold limit (set in resource xml files), starts cleanup of the Downloads data dir
  * to free up space.
  */
-class StorageManager {
+public class StorageManager {
     /** the max amount of space allowed to be taken up by the downloads data dir */
     private static final long sMaxdownloadDataDirSize =
             // Resources.getSystem().getInteger(R.integer.config_downloadDataDirSize)
